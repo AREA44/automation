@@ -1,11 +1,5 @@
+# To get started with autofix.ci see: https://autofix.ci
 name: autofix.ci
-
-on:
-  pull_request:
-  push:
-    branches: ['main']
-permissions:
-  contents: read
 
 jobs:
   autofix:
@@ -19,12 +13,12 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version-file: .nvmrc
+          node-version: 20
           cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
+
       - name: Format with Prettier
         run: pnpm exec prettier -w . "!.github"
 
